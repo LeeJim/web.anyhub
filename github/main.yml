@@ -1,0 +1,13 @@
+name: Collect websites
+on:
+  issues:
+    types: [opened, edited, milestoned]
+jobs:
+  build:
+    name: Init job
+    runs-on: ubuntu-latest
+    steps:
+      - name: start
+        uses: leejim/web.anyhub@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

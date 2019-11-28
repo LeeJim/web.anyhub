@@ -1,0 +1,10 @@
+name: 'Handle Issues'
+description: 'Handle Issues to create websites data'
+inputs:
+  token:
+    description: 'GitHub access token'
+    required: false
+    default: ${{ secrets.GITHUB_TOKEN }}
+runs:
+  using: 'node12'
+  main: 'index.js'
