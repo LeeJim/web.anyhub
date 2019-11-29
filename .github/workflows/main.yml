@@ -10,4 +10,4 @@ jobs:
       - name: start
         uses: leejim/web.anyhub
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
