@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: start
-        uses: leejim/web.anyhub
+        uses: leejim/web.anyhub@master
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
