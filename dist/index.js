@@ -9764,7 +9764,7 @@ const github = __webpack_require__(303);
     } catch (error) {
         core.setFailed(error.message);
     }
-})
+}())
 
 
 /***/ }),

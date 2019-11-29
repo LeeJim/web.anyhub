@@ -13,4 +13,4 @@ const github = require('@actions/github');
     } catch (error) {
         core.setFailed(error.message);
     }
-})
+}())
