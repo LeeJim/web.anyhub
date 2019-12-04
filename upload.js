@@ -1,22 +1,20 @@
-var fs = require('fs');
-var qiniu = require("qiniu");
-//需要填写你的 Access Key 和 Secret Key
-qiniu.conf.ACCESS_KEY = 'Access_Key';
-qiniu.conf.SECRET_KEY = 'Secret_Key';
-bucket = 'Bucket_Name';
-key = 'websites.json';
+let fs = require('fs');
+let qiniu = require("qiniu");
+let core = require('@actions/core');
 
-var putPolicy = new qiniu.rs.PutPolicy(bucket + ':' + key);
+qiniu.conf.ACCESS_KEY = core.getInput('QN_ACCESS_KEY');
+qiniu.conf.SECRET_KEY = core.getInput('QN_SECRET_KEY');
+let bucket = 'shenzhen';
+let key = 'websites.json';
 
-//生成上传 Token
-token = putPolicy.token();
+let putPolicy = new qiniu.rs.PutPolicy(bucket + ':' + key);
 
-//要上传文件的本地路径
-filePath = './ruby-logo.png'
+// 生成上传 Token
+let token = putPolicy.token();
 
-//构造上传函数
+// 构造上传函数
 function uploadFile(uptoken, key, localFile) {
-  var extra = new qiniu.io.PutExtra();
+  let extra = new qiniu.io.PutExtra();
     qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
       if(!err) {
         // 上传成功， 处理返回值
@@ -28,9 +26,7 @@ function uploadFile(uptoken, key, localFile) {
   });
 }
 
-//调用uploadFile上传
-uploadFile(token, key, filePath);
 module.exports = function(data) {
-    // fs.createWriteStream('./tmp.json', )
-    qiniu.io.putFile()
+  fs.writeFileSync('./tmp.json', data)
+  uploadFile(token, key, './tmp.json');
 }

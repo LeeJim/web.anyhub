@@ -1,6 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+let upload = require('./upload')
+
 (async function() {
     try {
         const myToken = core.getInput('token');
@@ -32,10 +34,13 @@ const github = require('@actions/github');
                     tmp.label = str.split(':')[1].trim();
                 }
             });
+            if (['name', 'url', 'reportor', 'label'].every((key => key in tmp))) {
+                resData.push(tmp);
+            }
         })
-        if (['name', 'url', 'reportor', 'label'].every((key => key in tmp))) {
-            resData.push(tmp);
-        }
+        console.log(data);
+        
+        upload(data)        
     } catch (error) {
         core.setFailed(error.message);
     }
